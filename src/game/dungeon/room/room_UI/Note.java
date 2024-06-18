@@ -9,29 +9,37 @@ import javax.swing.Action;
 import javax.swing.KeyStroke;
 
 import game.game_components.PopupUI;
+import game.utilities.ImageUtilities;
 
 public class Note extends PopupUI {
     private int i;
     private BufferedImage[] images;
 
-    public Note(int idx) {
-        super(640, 480, 4);
+    public Note(int idx, int id) {
+        super(768, 576, 4);
         String right = new StringBuilder(idx).append("right").toString();
         String left = new StringBuilder(idx).append("left").toString();
-        getInputMap(2).put(KeyStroke.getKeyStroke((new StringBuilder("pressed ").append(idx % 10)).toString()), right);
+        getInputMap(2).put(KeyStroke.getKeyStroke((new StringBuilder("pressed ").append(idx % 10)).toString()),
+                right);
         getInputMap(2).put(KeyStroke.getKeyStroke("pressed D"), right);
         getInputMap(2).put(KeyStroke.getKeyStroke("pressed A"), left);
         getActionMap().put(right, rightImage);
         getActionMap().put(left, leftImage);
-        // Test
-        int size = 10;
+        int size = 4;
+        if (id == 6) {
+            size = 3;
+        }
         images = new BufferedImage[size];
+        for (int i = 0; i < size; i++) {
+            images[i] = ImageUtilities.getImage("item_images",
+                    new StringBuilder().append(id).append('.').append(i + 1).toString());
+        }
     }
 
     @Override
     public void drawComponent(Graphics2D g2d) {
         super.drawComponent(g2d);
-        g2d.drawImage(images[i], 0, 0, null);
+        g2d.drawImage(images[i], 64, 48, null);
     }
 
     @Override

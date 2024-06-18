@@ -53,8 +53,13 @@ public class LightingEngine extends GameComponent {
     }
 
     private Area a;
+    private int last;
 
     public void update() {
+        if (last != entity.getLightStrength()) {
+            randomFactor = (double) last / entity.getLightStrength() - 1;
+            last = entity.getLightStrength();
+        }
         randomFactor += 2 * flickerDegree * Math.random() - flickerDegree - randomFactor * flickerSize;
     }
 

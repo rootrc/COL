@@ -6,6 +6,7 @@ import game.Game;
 import game.dungeon.Dungeon;
 import game.dungeon.mechanics.CollisionChecker;
 import game.dungeon.mechanics.LightingEngine;
+import game.dungeon.mechanics.SnowEffect;
 import game.dungeon.room.entity.Player;
 import game.dungeon.room.object.Ladder;
 import game.dungeon.room.object_utilities.RoomObject;
@@ -17,7 +18,6 @@ import game.game_components.GameComponent;
 public class Room extends GameComponent {
     private int id;
     private Player player;
-    // private TileGrid tileGrid;
     private RoomConnecter connecter;
     private RoomObjectManager objectManager;
     private CollisionChecker collision;
@@ -27,24 +27,14 @@ public class Room extends GameComponent {
         super(tileGrid.getWidth(), tileGrid.getHeight());
         this.id = id;
         this.player = player;
-        // this.tileGrid = tileGrid;
         connecter = new RoomConnecter();
         this.collision = collision;
         this.objectManager = objectManager;
         add(tileGrid);
         add(objectManager);
         add(player);
+        add(new SnowEffect(getWidth(), getHeight(), collision));
         add(lighting);
-    }
-
-    // TEMP
-    public Room(TileGrid tileGrid, CollisionChecker collision, RoomObjectManager objectManager) {
-        super(tileGrid.getWidth(), tileGrid.getHeight());
-        // this.tileGrid = tileGrid;
-        this.collision = collision;
-        this.objectManager = objectManager;
-        add(tileGrid);
-        add(objectManager);
     }
 
     public void drawComponent(Graphics2D g2d) {

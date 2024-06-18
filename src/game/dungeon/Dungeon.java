@@ -1,5 +1,6 @@
 package game.dungeon;
 
+import java.awt.Component;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
@@ -16,6 +17,7 @@ import game.dungeon.room.room_UI.PauseMenu;
 import game.dungeon.room_factory.RoomFactory;
 import game.game_components.GameComponent;
 import game.game_components.GamePanel;
+import game.game_components.PopupUI;
 import game.utilities.ActionUtilities;
 
 public class Dungeon extends GamePanel {
@@ -42,11 +44,10 @@ public class Dungeon extends GamePanel {
 
     public Dungeon(Action changePanel) {
         super(changePanel);
-        inventory = new Inventory(8);
+        inventory = new Inventory(6);
         player = new Player(nextRoom, inventory);
         roomFactory = new RoomFactory(player);
         room = roomFactory.getStartingRoom(1);
-        // room = roomFactory.createRandomRoom(40, 30);
         add(room);
         add(inventory);
         roomMenu = new PauseMenu(new AbstractAction() {
@@ -66,7 +67,7 @@ public class Dungeon extends GamePanel {
         remove(room);
         remove(inventory);
         remove(UI);
-        inventory = new Inventory(8);
+        inventory = new Inventory(6);
         player = new Player(nextRoom, inventory);
         roomFactory = new RoomFactory(player);
         room = roomFactory.getStartingRoom(1);
@@ -89,6 +90,12 @@ public class Dungeon extends GamePanel {
 
     public static void removeUI(GameComponent gameComponent) {
         UI.remove(gameComponent);
+    }
+
+    public static void clearUI() {
+        for (Component component: UI.getComponents()) {
+            ((PopupUI) component).exitPanel();
+        }
     }
 
     private class UILayer extends GameComponent {

@@ -11,9 +11,11 @@ import javax.swing.JPanel;
 import game.Game;
 
 public abstract class GamePanel extends JPanel {
+    private Action changePanel;
     private FadingEffect fadingEffect;
 
     public GamePanel(Action changePanel) {
+        this.changePanel = changePanel;
         setPreferredSize(new Dimension(Game.screenWidth, Game.screenHeight));
         if (!Game.DEBUG) {
             setBackground(Color.black);
@@ -43,6 +45,10 @@ public abstract class GamePanel extends JPanel {
 
     public final void add(GameComponent gameComponent) {
         add(gameComponent, 0);
+    }
+
+    protected final Action getChangePanel() {
+        return changePanel;
     }
 
     private class FadingEffect extends GameComponent {

@@ -7,7 +7,6 @@ import game.dungeon.room.tile.Tile;
 import game.dungeon.room.tile.TileGrid;
 import game.game_components.Factory;
 import game.utilities.ImageUtilities;
-import game.utilities.roomgenerator.MapGenerator;
 
 class TileGridFactory extends Factory<TileGrid> {
     private static final String name = "dungeonTileSet";
@@ -26,10 +25,6 @@ class TileGridFactory extends Factory<TileGrid> {
                 tileMap[r][c] = getTile(r, c);
             }
         }
-    }
-
-    TileGrid createRandomGrid(int N, int M) {
-        return new TileGrid(createGrid(N, M, MapGenerator.getRandomMap(N, M)));
     }
 
     TileGrid createGrid(RoomFileData file) {

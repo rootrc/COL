@@ -12,14 +12,12 @@ public abstract class Item {
     private ImageIcon rolloverIcon;
     private Action acquireItem;
     private String name;
-    private String description;
     private Action useItem;
 
-    public Item(Inventory inventory, int r, int c, String name, String description) {
-        imageIcon = new ImageIcon(ImageUtilities.getImage("item_images", "itemTileSet", r, c, 2));
-        rolloverIcon = new ImageIcon(ImageUtilities.getImage("item_images", "itemTileSet1", r, c, 2));
+    public Item(Inventory inventory, int i, String name) {
+        imageIcon = new ImageIcon(ImageUtilities.getImage("item_images", "itemTileSet", 0, i, 2));
+        rolloverIcon = new ImageIcon(ImageUtilities.getImage("item_images", "itemTileSet1", 0, i, 2));
         this.name = name;
-        this.description = description;
         acquireItem = ActionUtilities.addItem(inventory, this);
     }
 
@@ -49,11 +47,7 @@ public abstract class Item {
         return name;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
     public String getToolTip() {
-        return new StringBuilder("<html>").append(name).append("<br>").append(description).append("</html>").toString();
+        return name;
     }
 }
