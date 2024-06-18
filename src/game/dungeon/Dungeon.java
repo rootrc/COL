@@ -21,9 +21,9 @@ import game.game_components.PopupUI;
 import game.utilities.ActionUtilities;
 
 public class Dungeon extends GamePanel {
-    public final static int TILESIZE = 16;
-    public final static int maxScreenRow = 48;
-    public final static int maxScreenCol = 64;
+    public static final int TILESIZE = 16;
+    public static final int maxScreenRow = 48;
+    public static final int maxScreenCol = 64;
 
     private Room room;
     private Inventory inventory;
